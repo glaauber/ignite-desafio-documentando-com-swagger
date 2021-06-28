@@ -1,0 +1,125 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "CreateUserApp Api Docs",
+        "description": "This is a CreateUserApp API Documentation. Enjoy!",
+        "version": "1.0.0",
+        "contact": {
+            "email": "glauber.a.botelho@mail.com"
+        }
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": ["User"],
+                "summary": "Create an User",
+                "description": "Create a new User",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "Fake Name",
+                                    "email": "fake@mail.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created."
+                    },
+                    "400": {
+                        "description": "User already exists."
+                    }
+                }
+            },
+            "get": {
+                "tags": ["User"],
+                "summary": "List Users",
+                "description": "List all Users",
+                "parameters": [ 
+                    {
+                        "description": "User ID",
+                        "in": "header",
+                        "name": "user_id",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success."
+                    },
+                    "400": {
+                        "description": "Access denied."
+                    }
+                }
+            }   
+        },
+        "/users/{user_id}": {
+            "get": {   
+                "tags": ["User"],
+                "summary": "Show User Profile",
+                "description": "Show user profile",
+                "parameters": [ 
+                    {
+                        "description": "User ID",
+                        "in": "path",
+                        "name": "user_id",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success."
+                    },
+                    "400": {
+                        "description": "User not found."
+                    }
+                }
+            }
+        },
+        "/users/{user_id}/admin": {
+            "get": {   
+                "tags": ["User"],
+                "summary": "Turn User an Admin",
+                "description": "Turn User an Admin",
+                "parameters": [ 
+                    {
+                        "description": "User ID",
+                        "in": "path",
+                        "name": "user_id",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success."
+                    },
+                    "400": {
+                        "description": "User not found."
+                    }
+                }
+            }
+        }
+    }
+}
